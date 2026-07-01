@@ -29,6 +29,6 @@ jobs:
         run: python src/main.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}

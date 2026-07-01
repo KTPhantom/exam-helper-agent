@@ -8,7 +8,7 @@ you a skimmable 5-minute digest every morning at 7:00 AM IST.
 ## Architecture
 
 ```
-RSS Feeds (PIB, Hindu, IE) → Gemini AI (summarize) → Email (Resend)
+RSS Feeds (PIB, Hindu, IE) → Gemini AI (summarize) → Email (Brevo)
          ↑                                                ↑
     GitHub Actions (daily cron, free)              You (inbox)
 ```
@@ -20,7 +20,7 @@ RSS Feeds (PIB, Hindu, IE) → Gemini AI (summarize) → Email (Resend)
 | Service | Free Tier | Get Key |
 |---|---|---|
 | **Google Gemini** | 1,500 req/day | [aistudio.google.com](https://aistudio.google.com) |
-| **Resend** | 100 emails/day | [resend.com](https://resend.com) |
+| **Brevo** | 300 emails/day | [brevo.com](https://brevo.com) |
 
 ### 2. Local Setup
 
@@ -64,9 +64,9 @@ python src/main.py
 | Secret Name | Value |
 |---|---|
 | `GEMINI_API_KEY` | Your Gemini API key |
-| `RESEND_API_KEY` | Your Resend API key |
-| `EMAIL_TO` | Your email address |
-| `EMAIL_FROM` | `onboarding@resend.dev` (or your verified Resend domain) |
+| `BREVO_API_KEY` | Your Brevo API key |
+| `EMAIL_TO` | Recipient email addresses (comma-separated if multiple) |
+| `EMAIL_FROM` | Your verified sender email address in Brevo |
 
 4. Go to **Actions** tab → **Daily GK Digest** → **Run workflow** to test
 5. The cron will now run automatically every day at 7:00 AM IST
@@ -110,7 +110,7 @@ The digest follows an industry-proven structure (Morning Brew + TLDR + 1440 Dail
 | Scheduling | GitHub Actions | $0 |
 | News Data | RSS Feeds | $0 |
 | AI Summarization | Gemini Flash (free tier) | $0 |
-| Email Delivery | Resend (free tier) | $0 |
+| Email Delivery | Brevo (free tier) | $0 |
 | **Total** | | **$0** |
 
 ## Future Expansion
