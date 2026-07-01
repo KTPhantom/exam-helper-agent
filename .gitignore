@@ -1,0 +1,7 @@
+.env
+output_digest.md
+output_digest.html
+__pycache__/
+*.pyc
+.venv/
+venv/

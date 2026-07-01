@@ -1,0 +1,353 @@
+# RSS Feed Configuration for GK Digest Agent
+# Each topic maps to relevant RSS feeds for scraping
+# NOTE: Only feeds that respond with valid RSS/XML are included.
+# PIB, ISRO, LiveLaw, and Down to Earth have unreliable RSS feeds
+# and are excluded to avoid errors. Their content is captured indirectly
+# via The Hindu and Indian Express which cover those stories.
+
+topics:
+  defence:
+    name: "Defence — Army, Navy, Air Force"
+    emoji: "🛡️"
+    order: 1
+    feeds:
+      - url: "https://www.thehindu.com/news/national/feeder/default.rss"
+        source: "The Hindu"
+      - url: "https://indianexpress.com/section/india/feed/"
+        source: "Indian Express"
+    keywords:
+      - indian army
+      - indian navy
+      - indian air force
+      - IAF
+      - defence ministry
+      - DRDO
+      - HAL
+      - missile test
+      - BrahMos
+      - INS 
+      - frigate
+      - submarine
+      - fighter jet
+      - Tejas
+      - naval exercise
+      - military exercise
+      - joint exercise
+      - regiment
+      - chief of army
+      - chief of naval
+      - chief of air
+      - defence acquisition
+      - Agni
+      - Akash
+      - ASAT
+      - LCA
+      - Rafale
+      - Sukhoi
+      - Operation Sindoor
+      - armed forces
+      - BSF
+      - CRPF
+      - Coast Guard
+      - defence budget
+      - border security
+
+  polity:
+    name: "Indian Polity & Political Science"
+    emoji: "🏛️"
+    order: 2
+    feeds:
+      - url: "https://www.thehindu.com/news/national/feeder/default.rss"
+        source: "The Hindu"
+      - url: "https://indianexpress.com/section/india/feed/"
+        source: "Indian Express"
+    keywords:
+      - Lok Sabha
+      - Rajya Sabha
+      - Supreme Court
+      - High Court
+      - Constitution
+      - Article 370
+      - amendment bill
+      - fundamental rights
+      - CJI
+      - election commission
+      - governor
+      - president of india
+      - prime minister
+      - parliament session
+      - ordinance
+      - constitutional bench
+      - writ petition
+      - PIL
+      - cabinet approves
+      - reservation
+      - OBC
+      - SC/ST
+      - delimitation
+      - anti-defection
+
+  economics:
+    name: "Economics"
+    emoji: "💰"
+    order: 3
+    feeds:
+      - url: "https://www.livemint.com/rss/economy"
+        source: "Livemint"
+      - url: "https://www.thehindu.com/business/feeder/default.rss"
+        source: "The Hindu Business"
+    keywords:
+      - RBI
+      - repo rate
+      - GDP
+      - inflation rate
+      - fiscal deficit
+      - union budget
+      - GST collection
+      - forex reserves
+      - FDI
+      - trade deficit
+      - monetary policy
+      - economic survey
+      - SEBI
+      - Sensex
+      - Nifty
+      - NITI Aayog
+      - disinvestment
+      - rupee
+      - current account
+      - WPI
+      - CPI
+      - PLI scheme
+      - Make in India
+
+  science_tech:
+    name: "General Science & Technology"
+    emoji: "🔬"
+    order: 4
+    feeds:
+      - url: "https://www.thehindu.com/sci-tech/feeder/default.rss"
+        source: "The Hindu"
+      - url: "https://indianexpress.com/section/technology/feed/"
+        source: "Indian Express"
+    keywords:
+      - ISRO
+      - satellite launch
+      - PSLV
+      - GSLV
+      - Chandrayaan
+      - Gaganyaan
+      - SPADEX
+      - quantum computing
+      - artificial intelligence
+      - 5G rollout
+      - semiconductor
+      - IIT
+      - Nobel Prize
+      - NASA
+      - SpaceX
+      - CERN
+      - genome
+      - BARC
+      - nuclear energy
+      - supercomputer
+      - patent filed
+      - cybersecurity
+
+  geography:
+    name: "Geography"
+    emoji: "🌍"
+    order: 5
+    feeds:
+      - url: "https://www.thehindu.com/news/national/feeder/default.rss"
+        source: "The Hindu"
+    keywords:
+      - earthquake
+      - cyclone
+      - monsoon onset
+      - IMD forecast
+      - tsunami
+      - volcano
+      - border dispute
+      - maritime boundary
+      - ocean current
+      - glacier
+      - flood
+      - drought
+      - El Nino
+      - La Nina
+      - Himalaya
+      - tectonic
+
+  environment:
+    name: "Environment & Ecology"
+    emoji: "🌿"
+    order: 6
+    feeds:
+      - url: "https://www.thehindu.com/sci-tech/energy-and-environment/feeder/default.rss"
+        source: "The Hindu"
+    keywords:
+      - climate change
+      - carbon emission
+      - air pollution
+      - biodiversity
+      - wildlife sanctuary
+      - Ramsar site
+      - wetland
+      - endangered species
+      - tiger reserve
+      - national park
+      - COP summit
+      - Paris Agreement
+      - renewable energy
+      - solar power
+      - green hydrogen
+      - mangrove
+      - coral reef
+      - deforestation
+      - Project Tiger
+      - wildlife census
+
+  history:
+    name: "Indian History"
+    emoji: "📜"
+    order: 7
+    feeds:
+      - url: "https://www.thehindu.com/news/national/feeder/default.rss"
+        source: "The Hindu"
+    keywords:
+      - anniversary of independence
+      - birth anniversary
+      - freedom fighter
+      - heritage site
+      - ASI archaeological
+      - ancient ruins
+      - historical monument
+      - Mughal
+      - British colonial
+      - partition of India
+      - Quit India
+      - Dandi March
+      - Mahatma Gandhi
+
+  art_culture:
+    name: "Art & Culture, Personalities"
+    emoji: "🎭"
+    order: 8
+    feeds:
+      - url: "https://www.thehindu.com/entertainment/feeder/default.rss"
+        source: "The Hindu"
+    keywords:
+      - UNESCO heritage
+      - GI tag
+      - classical dance
+      - classical music
+      - folk art
+      - Padma award
+      - Bharat Ratna
+      - cultural festival
+      - archaeological survey
+      - Sahitya Akademi
+      - Jnanpith
+      - tribal art
+      - Intangible heritage
+
+  organisations:
+    name: "Organisations, Summits & Conferences"
+    emoji: "🏢"
+    order: 9
+    feeds:
+      - url: "https://www.thehindu.com/news/international/feeder/default.rss"
+        source: "The Hindu"
+    keywords:
+      - United Nations
+      - UN General Assembly
+      - NATO
+      - BRICS summit
+      - SCO summit
+      - ASEAN summit
+      - G20 summit
+      - G7 summit
+      - WHO
+      - WTO
+      - IMF
+      - World Bank
+      - bilateral summit
+      - multilateral
+      - treaty signed
+      - MoU signed
+      - Indo-Pacific
+
+  awards:
+    name: "Awards, Honours, Books & Authors"
+    emoji: "🏆"
+    order: 10
+    feeds:
+      - url: "https://www.thehindu.com/news/national/feeder/default.rss"
+        source: "The Hindu"
+      - url: "https://indianexpress.com/section/india/feed/"
+        source: "Indian Express"
+    keywords:
+      - Nobel Prize
+      - Booker Prize
+      - Pulitzer
+      - Padma Shri
+      - Padma Bhushan
+      - Padma Vibhushan
+      - Bharat Ratna
+      - Ramon Magsaysay
+      - Sahitya Akademi Award
+      - Jnanpith Award
+      - Arjuna Award
+      - Khel Ratna
+      - Dronacharya Award
+      - Gallantry award
+      - book published
+      - autobiography
+
+  sports:
+    name: "Sports"
+    emoji: "⚽"
+    order: 11
+    feeds:
+      - url: "https://www.thehindu.com/sport/feeder/default.rss"
+        source: "The Hindu"
+      - url: "https://indianexpress.com/section/sports/feed/"
+        source: "Indian Express"
+    keywords:
+      - cricket
+      - hockey
+      - football
+      - tennis
+      - Olympics
+      - Asian Games
+      - Commonwealth Games
+      - World Cup
+      - FIFA
+      - ICC
+      - badminton
+      - wrestling
+      - boxing
+      - athletics
+      - Neeraj Chopra
+      - gold medal
+      - world record
+      - Grand Slam
+      - IPL
+      - T20 World Cup
+      - Champions Trophy
+
+  current_affairs:
+    name: "Current Affairs — National & International"
+    emoji: "📌"
+    order: 12
+    feeds:
+      - url: "https://www.thehindu.com/news/national/feeder/default.rss"
+        source: "The Hindu"
+      - url: "https://indianexpress.com/section/india/feed/"
+        source: "Indian Express"
+      - url: "https://www.thehindu.com/news/international/feeder/default.rss"
+        source: "The Hindu International"
+      - url: "https://www.livemint.com/rss/news"
+        source: "Livemint"
+    keywords: []  # Catch-all: items not matched by other topics go here
