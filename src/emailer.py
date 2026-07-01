@@ -52,9 +52,12 @@ def send_digest_email(
     resend.api_key = api_key
 
     try:
+        # Split comma-separated emails
+        recipients = [email.strip() for email in to_addr.split(',') if email.strip()]
+        
         params = {
             "from": f"GK Digest <{from_addr}>",
-            "to": [to_addr],
+            "to": recipients,
             "subject": subject,
             "html": html_body,
             "text": text_body,
