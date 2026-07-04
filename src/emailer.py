@@ -1,12 +1,12 @@
 """
 Email Sender for GK Digest Agent.
 
-Sends the formatted digest via Resend (free tier: 100 emails/day).
+Sends the formatted digest via Brevo API (free tier: 300 emails/day).
 Fallback to printing the digest to stdout if email fails.
 """
 
 import os
-import resend
+import requests
 
 
 def send_digest_email(
@@ -17,7 +17,7 @@ def send_digest_email(
     from_email: str = None,
 ) -> bool:
     """
-    Send the digest email via Resend API.
+    Send the digest email via Brevo API.
 
     Args:
         subject: Email subject line.
@@ -29,9 +29,9 @@ def send_digest_email(
     Returns:
         True if sent successfully, False otherwise.
     """
-    api_key = os.environ.get('RESEND_API_KEY', '')
+    api_key = os.environ.get('BREVO_API_KEY', '')
     if not api_key:
-        print("  ⚠️  RESEND_API_KEY not set. Printing digest to stdout instead.")
+        print("  ⚠️  BREVO_API_KEY not set. Printing digest to stdout instead.")
         print("\n" + "=" * 60)
         print(f"SUBJECT: {subject}")
         print("=" * 60)
@@ -39,50 +39,56 @@ def send_digest_email(
         return False
 
     to_addr = to_email or os.environ.get('EMAIL_TO', '')
-    from_addr = from_email or os.environ.get('EMAIL_FROM', 'onboarding@resend.dev')
+    from_addr = from_email or os.environ.get('EMAIL_FROM', '')
 
-    if not to_addr:
-        print("  ⚠️  EMAIL_TO not set. Cannot send email.")
+    if not to_addr or not from_addr:
+        print("  ⚠️  EMAIL_TO or EMAIL_FROM not set. Cannot send email.")
         print("\n" + "=" * 60)
         print(f"SUBJECT: {subject}")
         print("=" * 60)
         print(text_body)
         return False
 
-    resend.api_key = api_key
+    # Split comma-separated emails for multiple recipients
+    recipients = [{"email": email.strip()} for email in to_addr.split(',') if email.strip()]
+
+    headers = {
+        "api-key": api_key,
+        "content-type": "application/json",
+        "accept": "application/json"
+    }
+
+    payload = {
+        "sender": {"name": "GK Digest", "email": from_addr},
+        "to": recipients,
+        "subject": subject,
+        "htmlContent": html_body,
+        "textContent": text_body
+    }
 
     try:
-        # Split comma-separated emails
-        recipients = [email.strip() for email in to_addr.split(',') if email.strip()]
-        
-        params = {
-            "from": f"GK Digest <{from_addr}>",
-            "to": recipients,
-            "subject": subject,
-            "html": html_body,
-            "text": text_body,
-        }
-
-        result = resend.Emails.send(params)
-        print(f"  ✅ Email sent successfully to {to_addr}")
-        print(f"     Message ID: {result.get('id', 'N/A')}")
-        return True
-
+        response = requests.post(
+            "https://api.brevo.com/v3/smtp/email",
+            json=payload,
+            headers=headers,
+            timeout=10
+        )
+        if response.status_code in [200, 201, 202]:
+            print(f"  ✅ Email sent successfully to {to_addr}")
+            return True
+        else:
+            print(f"  ❌ Email failed (HTTP {response.status_code}): {response.text}")
+            print("  📋 Falling back to stdout output:")
+            print("\n" + "=" * 60)
+            print(f"SUBJECT: {subject}")
+            print("=" * 60)
+            print(text_body)
+            return False
     except Exception as e:
-        print(f"  ❌ Email failed: {e}")
-        print("  📋 Falling back to stdout output:\n")
+        print(f"  ❌ Error calling Brevo API: {e}")
+        print("  📋 Falling back to stdout output:")
+        print("\n" + "=" * 60)
+        print(f"SUBJECT: {subject}")
+        print("=" * 60)
         print(text_body)
         return False
-
-
-if __name__ == '__main__':
-    """Quick test: send a test email."""
-    from dotenv import load_dotenv
-    load_dotenv()
-
-    success = send_digest_email(
-        subject="🎯 GK Digest – Test Email",
-        html_body="<h1>Test</h1><p>This is a test email from GK Digest Agent.</p>",
-        text_body="Test: This is a test email from GK Digest Agent.",
-    )
-    print(f"\nTest result: {'Success' if success else 'Failed'}")
